@@ -63,7 +63,7 @@ export const rooms = roomImages.slice(0, 28).map((img, i) => ({
     : i < 20
     ? "Indulge in luxury with separate living areas and premium furnishings"
     : "The ultimate in luxury and sophistication with panoramic views",
-  price: i < 10 ? 299 : i < 20 ? 499 : 999,
+  price: i < 10 ? 2499 : i < 20 ? 4199 : 8499,
   image: img.url,
   size: i < 10 ? "350 sq ft" : i < 20 ? "550 sq ft" : "1200 sq ft",
   guests: i < 10 ? 2 : i < 20 ? 3 : 4,
