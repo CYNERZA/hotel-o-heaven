@@ -54,7 +54,181 @@ export const photoShowcase = [
   ...lobbyImages.slice(6, 10)
 ].map((img, index) => ({ ...img, id: index + 1 }));
 
-// Rooms data with individual images
+// Room Types - 3 different categories with detailed information
+export const roomTypes = [
+  {
+    id: 1,
+    name: "Deluxe Room",
+    category: "Deluxe",
+    description: "Experience comfort and elegance in our spacious deluxe rooms with modern amenities and contemporary design",
+    price: 2499,
+    images: [
+      `/images/room-01.jpg`,
+      `/images/room-02.jpg`,
+      `/images/room-03.jpg`,
+      `/images/room-04.jpg`,
+      `/images/room-05.jpg`,
+      `/images/room-06.jpg`
+    ],
+    size: "350 sq ft",
+    guests: 2,
+    bedType: "King Size Bed",
+    amenities: [
+      { name: "King Size Bed", icon: "bed", description: "Luxurious king-size bed with premium mattress" },
+      { name: "Free Wi-Fi", icon: "wifi", description: "High-speed internet connectivity" },
+      { name: "Smart TV", icon: "tv", description: "55-inch 4K Smart TV with streaming services" },
+      { name: "Air Conditioning", icon: "ac", description: "Individual climate control" },
+      { name: "Mini Bar", icon: "wine", description: "Stocked with premium beverages" },
+      { name: "City View", icon: "building", description: "Panoramic city skyline views" },
+      { name: "Work Desk", icon: "desk", description: "Spacious desk with ergonomic chair" },
+      { name: "Coffee Maker", icon: "coffee", description: "Complimentary coffee and tea" },
+      { name: "Safe Deposit", icon: "lock", description: "In-room electronic safe" },
+      { name: "Bathroom Amenities", icon: "shower", description: "Premium toiletries and rainfall shower" }
+    ],
+    features: [
+      "24/7 Room Service",
+      "Daily Housekeeping",
+      "Complimentary Breakfast",
+      "Free Parking",
+      "Airport Shuttle Service"
+    ],
+    availableRooms: 10
+  },
+  {
+    id: 2,
+    name: "Executive Suite",
+    category: "Suite",
+    description: "Indulge in luxury with separate living areas, premium furnishings, and enhanced amenities for the discerning traveler",
+    price: 4199,
+    images: [
+      `/images/room-11.jpg`,
+      `/images/room-12.jpg`,
+      `/images/room-13.jpg`,
+      `/images/room-14.jpg`,
+      `/images/room-15.jpg`,
+      `/images/room-16.jpg`,
+      `/images/room-17.jpg`,
+      `/images/room-18.jpg`
+    ],
+    size: "550 sq ft",
+    guests: 3,
+    bedType: "King Bed + Sofa Bed",
+    amenities: [
+      { name: "Separate Living Room", icon: "sofa", description: "Spacious living area with luxury seating" },
+      { name: "King Size Bed", icon: "bed", description: "Premium king bed with luxury linens" },
+      { name: "Work Desk & Chair", icon: "desk", description: "Executive workspace with office amenities" },
+      { name: "Premium Bathroom", icon: "bath", description: "Marble bathroom with bathtub and rainfall shower" },
+      { name: "Private Balcony", icon: "balcony", description: "Furnished balcony with stunning views" },
+      { name: "Air Conditioning", icon: "ac", description: "Dual-zone climate control" },
+      { name: "Smart TV (2)", icon: "tv", description: "65-inch TVs in bedroom and living room" },
+      { name: "Mini Bar & Fridge", icon: "fridge", description: "Full-size refrigerator and premium bar" },
+      { name: "Espresso Machine", icon: "coffee", description: "Nespresso machine with selection of pods" },
+      { name: "Free Wi-Fi", icon: "wifi", description: "Ultra-high-speed internet" },
+      { name: "Walk-in Closet", icon: "closet", description: "Spacious wardrobe with safe" },
+      { name: "Premium Amenities", icon: "star", description: "Luxury toiletries and bathrobes" }
+    ],
+    features: [
+      "Priority Check-in/Check-out",
+      "Complimentary Breakfast & Evening Cocktails",
+      "Butler Service Available",
+      "Access to Executive Lounge",
+      "Free Laundry (up to 5 items/day)",
+      "Late Check-out (subject to availability)"
+    ],
+    availableRooms: 10
+  },
+  {
+    id: 3,
+    name: "Presidential Suite",
+    category: "Presidential",
+    description: "The ultimate in luxury and sophistication with panoramic views, exclusive amenities, and personalized butler service",
+    price: 8499,
+    images: [
+      `/images/room-21.jpg`,
+      `/images/room-22.jpg`,
+      `/images/room-23.jpg`,
+      `/images/room-24.jpg`,
+      `/images/room-25.jpg`,
+      `/images/room-26.jpg`,
+      `/images/room-27.jpg`,
+      `/images/room-28.jpg`
+    ],
+    size: "1200 sq ft",
+    guests: 4,
+    bedType: "King Bed + 2 Twin Beds",
+    amenities: [
+      { name: "Master Bedroom Suite", icon: "bed", description: "Luxurious master bedroom with king bed" },
+      { name: "Second Bedroom", icon: "bed", description: "Additional bedroom with twin beds" },
+      { name: "Grand Living Room", icon: "sofa", description: "Expansive living area with luxury furnishings" },
+      { name: "Dining Area", icon: "dining", description: "Formal dining table for 6 guests" },
+      { name: "Butler Service", icon: "butler", description: "24/7 dedicated butler service" },
+      { name: "Premium Amenities", icon: "star", description: "Luxury toiletries, robes, and slippers" },
+      { name: "Panoramic Ocean View", icon: "view", description: "Floor-to-ceiling windows with breathtaking views" },
+      { name: "Private Terrace", icon: "terrace", description: "Spacious outdoor terrace with seating" },
+      { name: "Two Bathrooms", icon: "bath", description: "Master bath with jacuzzi and guest bathroom" },
+      { name: "Kitchen Bar", icon: "kitchen", description: "Kitchenette with premium appliances" },
+      { name: "Entertainment System", icon: "tv", description: "75-inch 8K TV with surround sound" },
+      { name: "Air Conditioning", icon: "ac", description: "Multi-zone climate control system" },
+      { name: "Free Wi-Fi", icon: "wifi", description: "Dedicated high-speed fiber connection" },
+      { name: "Grand Piano", icon: "piano", description: "Baby grand piano (upon request)" },
+      { name: "Meeting Room", icon: "meeting", description: "Small conference area with video conferencing" }
+    ],
+    features: [
+      "VIP Check-in/Check-out in Suite",
+      "All Meals Included (In-room or Restaurant)",
+      "24/7 Dedicated Butler & Concierge",
+      "Complimentary Spa Treatment (2 per stay)",
+      "Chauffeur Service within City",
+      "Personal Chef Available",
+      "Unlimited Laundry & Dry Cleaning",
+      "Access to All Hotel Facilities"
+    ],
+    availableRooms: 8
+  },
+  {
+    id: 4,
+    name: "Family Suite",
+    category: "Family",
+    description: "Perfect for families with spacious accommodations, connecting rooms, and kid-friendly amenities",
+    price: 5499,
+    images: [
+      `/images/room-07.jpg`,
+      `/images/room-08.jpg`,
+      `/images/room-09.jpg`,
+      `/images/room-10.jpg`,
+      `/images/room-19.jpg`,
+      `/images/room-20.jpg`
+    ],
+    size: "750 sq ft",
+    guests: 5,
+    bedType: "King Bed + 2 Bunk Beds",
+    amenities: [
+      { name: "Master Bedroom", icon: "bed", description: "Separate master bedroom with king bed" },
+      { name: "Kids Room", icon: "bed", description: "Fun kids room with bunk beds" },
+      { name: "Living Area", icon: "sofa", description: "Family living space with entertainment" },
+      { name: "Two Bathrooms", icon: "bath", description: "Master and family bathrooms" },
+      { name: "Kitchenette", icon: "kitchen", description: "Microwave, fridge, and dining area" },
+      { name: "Smart TVs (2)", icon: "tv", description: "TVs in both bedrooms" },
+      { name: "Air Conditioning", icon: "ac", description: "Climate control throughout" },
+      { name: "Free Wi-Fi", icon: "wifi", description: "High-speed internet" },
+      { name: "Gaming Console", icon: "game", description: "PlayStation 5 with games for kids" },
+      { name: "Baby Amenities", icon: "baby", description: "Crib, high chair available on request" },
+      { name: "Balcony", icon: "balcony", description: "Safe, enclosed balcony" },
+      { name: "Mini Bar", icon: "fridge", description: "Stocked with family-friendly options" }
+    ],
+    features: [
+      "Kids Welcome Package",
+      "Complimentary Breakfast for All",
+      "Babysitting Services Available",
+      "Kids Club Access",
+      "Board Games & Books",
+      "Priority Restaurant Reservations"
+    ],
+    availableRooms: 6
+  }
+];
+
+// Legacy rooms data - kept for backward compatibility
 export const rooms = roomImages.slice(0, 28).map((img, i) => ({
   id: i + 1,
   name: i < 10 ? `Deluxe Room ${i + 1}` : i < 20 ? `Executive Suite ${i - 9}` : `Presidential Suite ${i - 19}`,

@@ -134,81 +134,81 @@ const BookingModal = ({ isOpen, onClose, room, bookingDates, onPaymentSuccess })
   const totalAmount = room.price * nights;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-5xl shadow-2xl border-0 overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+      <Card className="w-full max-w-5xl shadow-2xl border-0 overflow-hidden my-4">
         {/* Header with Gradient */}
-        <div className="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-white p-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
-          <div className="relative z-10 flex justify-between items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-2">Guest Information</h2>
-              <p className="text-amber-100 text-lg">Enter your details to complete the booking</p>
+        <div className="bg-gradient-to-r from-amber-600 via-amber-700 to-amber-800 text-white p-4 sm:p-6 lg:p-8 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-amber-500/20 rounded-full blur-3xl -mr-32 sm:-mr-48 -mt-32 sm:-mt-48"></div>
+          <div className="relative z-10 flex justify-between items-start sm:items-center gap-4">
+            <div className="flex-1">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">Guest Information</h2>
+              <p className="text-amber-100 text-sm sm:text-base lg:text-lg">Enter your details to complete the booking</p>
             </div>
             <button
               onClick={onClose}
-              className="p-3 hover:bg-white/20 rounded-full transition-all duration-300 transform hover:scale-110"
+              className="p-2 sm:p-3 hover:bg-white/20 rounded-full transition-all duration-300 transform hover:scale-110 flex-shrink-0"
             >
-              <X size={28} />
+              <X size={24} className="sm:w-7 sm:h-7" />
             </button>
           </div>
         </div>
 
-        <CardContent className="pt-8 pb-8 px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <CardContent className="pt-6 pb-6 px-4 sm:pt-8 sm:pb-8 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             {/* Left: Room Details */}
             <div className="lg:col-span-1">
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 p-8 h-full">
-                <h3 className="font-bold text-2xl text-gray-900 mb-6">{room.name}</h3>
-                
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border-2 border-amber-200 p-4 sm:p-6 lg:p-8 h-full">
+                <h3 className="font-bold text-xl sm:text-2xl text-gray-900 mb-4 sm:mb-6">{room.name}</h3>
+
                 {/* Room Info Grid */}
-                <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b-2 border-amber-200">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b-2 border-amber-200">
                   <div>
                     <p className="text-xs font-semibold text-gray-600 mb-1">Price/Night</p>
-                    <p className="text-2xl font-bold text-amber-600">₹{room.price.toLocaleString()}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-amber-600">₹{room.price.toLocaleString()}</p>
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-gray-600 mb-1">Capacity</p>
-                    <p className="text-2xl font-bold text-gray-900">{room.guests}</p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{room.guests}</p>
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-gray-600 mb-1">Room Size</p>
-                    <p className="text-lg font-bold text-gray-900">{room.size}</p>
+                    <p className="text-base sm:text-lg font-bold text-gray-900">{room.size}</p>
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-gray-600 mb-1">Amenities</p>
-                    <p className="text-lg font-bold text-gray-900">{room.amenities.length}+</p>
+                    <p className="text-base sm:text-lg font-bold text-gray-900">{Array.isArray(room.amenities) ? room.amenities.length : 0}+</p>
                   </div>
                 </div>
 
                 {/* Booking Dates */}
-                <div className="space-y-3 mb-6 pb-6 border-b-2 border-amber-200">
-                  <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Check-in:</span>
-                    <span className="font-medium text-gray-900">{checkIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6 pb-4 sm:pb-6 border-b-2 border-amber-200">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-semibold text-gray-700">Check-in:</span>
+                    <span className="text-sm font-medium text-gray-900">{checkIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Check-out:</span>
-                    <span className="font-medium text-gray-900">{checkOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-semibold text-gray-700">Check-out:</span>
+                    <span className="text-sm font-medium text-gray-900">{checkOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="font-semibold text-gray-700">Nights:</span>
-                    <span className="font-medium text-gray-900">{nights} night{nights > 1 ? 's' : ''}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-semibold text-gray-700">Nights:</span>
+                    <span className="text-sm font-medium text-gray-900">{nights} night{nights > 1 ? 's' : ''}</span>
                   </div>
                 </div>
 
                 {/* Total Price */}
-                <div className="bg-white rounded-xl p-4 border-2 border-amber-300">
+                <div className="bg-white rounded-xl p-3 sm:p-4 border-2 border-amber-300 shadow-md">
                   <p className="text-xs font-semibold text-gray-600 mb-2">Total Amount</p>
-                  <p className="text-4xl font-bold text-amber-600">₹{totalAmount.toLocaleString()}</p>
+                  <p className="text-3xl sm:text-4xl font-bold text-amber-600">₹{totalAmount.toLocaleString()}</p>
                 </div>
               </div>
             </div>
 
             {/* Right: Guest Information Form */}
             <div className="lg:col-span-1">
-              <form onSubmit={handlePayment} className="space-y-6">
+              <form onSubmit={handlePayment} className="space-y-4 sm:space-y-6">
                 {error && (
-                  <div className="p-4 bg-red-50 border-2 border-red-200 rounded-lg text-red-700 text-sm font-semibold">
+                  <div className="p-3 sm:p-4 bg-red-50 border-2 border-red-200 rounded-lg text-red-700 text-xs sm:text-sm font-semibold">
                     ⚠️ {error}
                   </div>
                 )}
@@ -222,7 +222,7 @@ const BookingModal = ({ isOpen, onClose, room, bookingDates, onPaymentSuccess })
                     value={formData.fullName}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className="border-2 border-gray-300 focus:border-amber-500 focus:ring-amber-500 py-3 text-base"
+                    className="border-2 border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 py-3 px-4 text-base rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
                   />
                 </div>
 
@@ -238,7 +238,7 @@ const BookingModal = ({ isOpen, onClose, room, bookingDates, onPaymentSuccess })
                     value={formData.email}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className="border-2 border-gray-300 focus:border-amber-500 focus:ring-amber-500 py-3 text-base"
+                    className="border-2 border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 py-3 px-4 text-base rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
                   />
                 </div>
 
@@ -254,24 +254,29 @@ const BookingModal = ({ isOpen, onClose, room, bookingDates, onPaymentSuccess })
                     value={formData.phone}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className="border-2 border-gray-300 focus:border-amber-500 focus:ring-amber-500 py-3 text-base"
+                    className="border-2 border-gray-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 py-3 px-4 text-base rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed py-3 font-semibold text-base rounded-xl flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed py-3 sm:py-4 font-bold text-sm sm:text-base rounded-xl flex items-center justify-center gap-2 transform hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <CreditCard size={20} />
+                  <CreditCard size={18} className="sm:w-5 sm:h-5" />
                   {isLoading ? 'Processing...' : `Proceed to Pay ₹${totalAmount.toLocaleString()}`}
                 </Button>
 
-                <p className="text-xs text-gray-600 text-center leading-relaxed bg-amber-50 p-3 rounded-lg">
-                  ✓ Secure payment via Razorpay
-                  <br />
-                  ✓ Your booking will be confirmed after payment
-                </p>
+                <div className="text-xs sm:text-sm text-gray-600 text-center leading-relaxed bg-gradient-to-r from-amber-50 to-orange-50 p-3 sm:p-4 rounded-xl border border-amber-200">
+                  <div className="flex items-center justify-center gap-2 mb-1">
+                    <Check size={14} className="text-amber-600" />
+                    <span className="font-semibold text-amber-900">Secure payment via Razorpay</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <Check size={14} className="text-amber-600" />
+                    <span className="font-semibold text-amber-900">Instant booking confirmation</span>
+                  </div>
+                </div>
               </form>
             </div>
           </div>

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Users, Wind } from 'lucide-react';
+import { Users, Wind, Eye } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { rooms, lobbyImages, receptionImages, facadeImages, entranceImages, washroomImages } from '../mock';
+import { roomTypes, lobbyImages, receptionImages, facadeImages, entranceImages, washroomImages } from '../mock';
 import BookingModal from '../components/BookingModal';
 import PaymentConfirmation from '../components/PaymentConfirmation';
 import GuestSelectionModal from '../components/GuestSelectionModal';
+import RoomDetailModal from '../components/RoomDetailModal';
 
 const RoomsPage = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [isRoomDetailOpen, setIsRoomDetailOpen] = useState(false);
   const [isGuestSelectionOpen, setIsGuestSelectionOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState(null);
@@ -18,6 +20,11 @@ const RoomsPage = () => {
     checkOut: '',
     guests: '2'
   });
+
+  const handleViewDetails = (room) => {
+    setSelectedRoom(room);
+    setIsRoomDetailOpen(true);
+  };
 
   const handleRoomBooking = (room) => {
     setSelectedRoom(room);
@@ -55,18 +62,18 @@ const RoomsPage = () => {
             <div className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-100 rounded-full">
               <span className="text-purple-700 text-xs sm:text-sm font-semibold">Accommodations</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4">Our Rooms & Suites</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4">Our Room Types</h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              28 exquisitely designed rooms offering unparalleled comfort and luxury
+              Choose from our carefully curated selection of luxurious accommodations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {rooms.map((room, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {roomTypes.map((room, index) => (
               <Card key={room.id} className="overflow-hidden hover:shadow-2xl transition-all duration-500 group border-0 shadow-lg">
                 <div className="relative h-56 sm:h-64 overflow-hidden">
                   <img
-                    src={room.image}
+                    src={room.images[0]}
                     alt={room.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
@@ -74,18 +81,26 @@ const RoomsPage = () => {
                   <Badge className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base shadow-lg">
                     ₹{room.price}/night
                   </Badge>
+                  <Badge className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-white/90 text-gray-800 px-2 py-1 text-xs sm:text-sm font-semibold">
+                    {room.images.length} Photos
+                  </Badge>
                 </div>
                 <CardHeader className="pb-2 sm:pb-3">
                   <CardTitle className="text-lg sm:text-xl font-bold">{room.name}</CardTitle>
-                  <CardDescription className="text-xs sm:text-sm text-gray-600">{room.description}</CardDescription>
+                  <CardDescription className="text-xs sm:text-sm text-gray-600 line-clamp-2">{room.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                     {room.amenities.slice(0, 3).map((amenity, idx) => (
                       <Badge key={idx} variant="outline" className="text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 border-purple-200 text-purple-700">
-                        {amenity}
+                        {amenity.name}
                       </Badge>
                     ))}
+                    {room.amenities.length > 3 && (
+                      <Badge variant="outline" className="text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 border-purple-200 text-purple-700">
+                        +{room.amenities.length - 3} more
+                      </Badge>
+                    )}
                   </div>
                   <div className="flex justify-between items-center text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-gray-100">
                     <span className="flex items-center">
@@ -97,11 +112,20 @@ const RoomsPage = () => {
                       <span className="text-xs sm:text-sm">{room.guests} Guests</span>
                     </span>
                   </div>
-                  <Button
-                    onClick={() => handleRoomBooking(room)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base py-2 sm:py-3">
-                    Book Now
-                  </Button>
+                  <div className="flex flex-col gap-2">
+                    <Button
+                      onClick={() => handleViewDetails(room)}
+                      variant="outline"
+                      className="w-full border-2 border-purple-600 text-purple-600 hover:bg-purple-50 transition-all duration-300 text-sm sm:text-base py-2 sm:py-2.5 flex items-center justify-center gap-2">
+                      <Eye className="w-4 h-4" />
+                      View Details
+                    </Button>
+                    <Button
+                      onClick={() => handleRoomBooking(room)}
+                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base py-2 sm:py-2.5">
+                      Book Now
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -267,6 +291,13 @@ const RoomsPage = () => {
       </section>
 
       {/* Modals */}
+      <RoomDetailModal
+        isOpen={isRoomDetailOpen}
+        onClose={() => setIsRoomDetailOpen(false)}
+        room={selectedRoom}
+        onBookNow={handleRoomBooking}
+      />
+
       <GuestSelectionModal
         isOpen={isGuestSelectionOpen}
         onClose={() => setIsGuestSelectionOpen(false)}
